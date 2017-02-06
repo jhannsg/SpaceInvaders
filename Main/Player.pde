@@ -14,6 +14,17 @@ class Player extends Sprite {
     
   }
   
-
+  void draw(){
+    stroke(1);
+    rect(playerX, playerY, sizeX, sizeY);
+     
+  }
+  
+  void update(){
+    if (keyPressed && keyCode == LEFT) playerX -= 5;
+    if (keyPressed && keyCode == RIGHT) playerX += 5;
+    
+  }
+  
   
 }//end Player class
