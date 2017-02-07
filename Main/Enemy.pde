@@ -58,7 +58,8 @@ class Enemy extends Sprite {
            println("drawEnemy okay");
         }
         
-        ellipse(x , y , sizeX, sizeY);
+        //ellipse(x , y , sizeX, sizeY);
+        //rect (x,y, sizeX, sizeY);
          println("drawEnemy okay"); 
        
    }//end render()
@@ -78,7 +79,7 @@ class Enemy extends Sprite {
         if ((b.x >= x && b.x <= x+ sizeX &&
               b.y >= y && b.y <= y + sizeY) )
         {
-          sprites.remove(sp);
+          sprites.remove(b);
           sprites.remove(this);
         }
       }
@@ -86,13 +87,22 @@ class Enemy extends Sprite {
     
   }
  
-  
-  
-  
-  
  void drop()
    {
-     
+     for(int i = 0 ; i < sprites.size() ; i ++)
+    {
+      Sprite sp = sprites.get(i);
+       
+      if(sp instanceof Enemy )
+      {
+       Enemy e = (Enemy) sp;
+       if( ((e.x == width - sp.sizeX) || e.x < 20 ))
+       { 
+         sp.speed = -sp.speed;
+         e.y += 35;
+       }
+      }
+    }
    }  
     
 }

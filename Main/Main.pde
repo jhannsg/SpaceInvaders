@@ -27,16 +27,15 @@ void draw()
   background(0);
   
   //draw & update enemies
-  for(int i = sprites.size()-1; i >= 0 ; i--)
+  //for(int i = sprites.size()-1; i >= 0 ; i--)
+  for(int i = 0; i < sprites.size(); i++)
   {
     Sprite sp = sprites.get(i);
     sp.render();
     sp.update();
-    if( ((sp.x == width - sp.sizeX) || sp.x < 20 ))
-      { 
-         sprites.get(i).speed = -sprites.get(i).speed;
-         sprites.get(i).y += 35;         
-      }
+    sp.drop();
+    
+  
   }
  
   fill(white);

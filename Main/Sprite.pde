@@ -19,6 +19,7 @@ abstract class Sprite
  
  abstract void render();
  abstract void update();
+ abstract void drop();
  
  void die()
  {

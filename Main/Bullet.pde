@@ -15,20 +15,27 @@ class Bullet extends Sprite{
   
   void render()
   {
-   fill(white);
-   rect(x,y,5,20);
+    if (visible)
+    {
+       fill(white);
+       rect(x,y,5,20);
+    }
   }
   
   void update()
   {
     y -= bulletSpeed*3;
-    if (y < 5)
+    if (y < 30)
     {
-      
+      visible = false;
     }
     
     
     
+  }
+  
+  void drop()
+  {
   }
   
   
