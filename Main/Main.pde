@@ -25,6 +25,10 @@ void draw()
     Enemy e = enemies.get(i);
     e.drawEnemy();
     e.update();
+    if(e.alive && ((e.x == width - e.sizeX) || e.x < 1 ))
+      {
+          e.drop();
+      }
   }
   
   player.draw();

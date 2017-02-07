@@ -51,4 +51,18 @@ class Enemy extends Sprite {
   {
     x += enemySpeed;
   }
+  
+  void drop()
+  {
+    for(int i = 0; i < enemies.size(); i++)
+    {
+        enemies.get(i).enemySpeed = -enemies.get(i).enemySpeed;
+        enemies.get(i).y += 35;
+      
+    }
+  }
+  
+  
+    
+  
 }
