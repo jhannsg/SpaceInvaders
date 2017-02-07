@@ -4,23 +4,24 @@ class Bullet extends Sprite{
   float y;
   float bulletSpeed;
   
-  Bullet(float x, float y, float timeToLive)
+  Bullet(float x, float y,float bulletSpeed)
   {
    this.x = x;
    this.y = y;
    this.timeToLive = timeToLive;
+   this.bulletSpeed = bulletSpeed;
   }
   
   
   void render()
   {
    fill(white);
-   rect(x,y,5,10);
+   rect(x,y,5,20);
   }
   
   void update()
   {
-    y -= 1;
+    y -= bulletSpeed*3;
     if (y < 5)
     {
       

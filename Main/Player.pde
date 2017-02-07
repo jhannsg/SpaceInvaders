@@ -23,7 +23,7 @@ class Player extends Sprite {
     
     if (keyPressed && keyCode == UP )
     {
-      Bullet b = new Bullet(playerX+sizeX/2, playerY, 23);
+      Bullet b = new Bullet(playerX+sizeX/2, playerY, speed);
       sprites.add(b);
     }
     

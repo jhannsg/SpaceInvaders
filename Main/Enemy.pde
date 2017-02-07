@@ -19,16 +19,20 @@ class Enemy extends Sprite {
   public void createEnemy()
   { 
   
-    for (int i = 1; i <= noRows; i++)
+    for (int i = 0; i < noRows; i++)
     {
-      if(noRows > 1) 
+      if(i > 0) 
       {
-        x = x - noCols * 60; //reposition x after first row drawn
+        x = x - (noCols  * 60); //reposition x after first row drawn
       }
-      for (int j = 1; j <= noCols; j++) 
+      for (int j = 0; j < noCols; j++) 
       {
         sprites.add(new Enemy(x , y, enemySpeed));
         x += 60;
+        if(x == 1200)
+        {
+          x = x - (noCols  * 60);
+        }
       }
       y += 50;
       
@@ -40,7 +44,7 @@ class Enemy extends Sprite {
   void render()
   {
     
-      if (alive)
+      //if (alive)
       {
         if(frameCount%100 < 50){
           fill(white);
@@ -49,11 +53,13 @@ class Enemy extends Sprite {
         fill(red);
               
         }
- 
-         ellipse(x , y , sizeX, sizeY);
-         println("drawEnemy okay");
-            
-       } 
+      
+          ellipse(x , y , sizeX, sizeY);
+           println("drawEnemy okay");
+        }
+        
+        ellipse(x , y , sizeX, sizeY);
+         println("drawEnemy okay"); 
        
    }//end render()
  
@@ -61,6 +67,7 @@ class Enemy extends Sprite {
   void update()
   {
     x += enemySpeed;
+    if(x > 1200 || x < 50) enemySpeed *= -1;
     
      for(int i = 0 ; i < sprites.size() ; i ++)
     {
@@ -68,27 +75,28 @@ class Enemy extends Sprite {
       if (sp instanceof Bullet)
       {
         Bullet b = (Bullet) sp;
-        if (dist(sp.x, sp.y, this.x, this.y) < sizeX)
+        if ((b.x >= x && b.x <= x+ sizeX &&
+              b.y >= y && b.y <= y + sizeY) )
         {
-          sprites.remove(b);
+          sprites.remove(sp);
           sprites.remove(this);
         }
       }
     }
     
   }
+ 
   
-  void drop()
-  {
-    for(int i =  sprites.size()-1 ; i >= 0 ; i--)
-    {
-        sprites.get(i).speed = -sprites.get(i).speed;
-        sprites.get(i).y += 35;
-      
-    }
-  }
   
+  
+  
+ void drop()
+   {
+     
+   }  
+    
+}
+
   
     
   
-}

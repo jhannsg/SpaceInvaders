@@ -32,9 +32,10 @@ void draw()
     Sprite sp = sprites.get(i);
     sp.render();
     sp.update();
-    if(sp.alive && ((sp.x == width - sp.sizeX) || sp.x < 20 ))
-      {
-          enemy.drop();
+    if( ((sp.x == width - sp.sizeX) || sp.x < 20 ))
+      { 
+         sprites.get(i).speed = -sprites.get(i).speed;
+         sprites.get(i).y += 35;         
       }
   }
  
