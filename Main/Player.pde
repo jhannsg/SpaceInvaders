@@ -25,11 +25,9 @@ class Player extends Sprite {
     {
       Bullet b = new Bullet(playerX+sizeX/2, playerY, 23);
       sprites.add(b);
-
-    {
-      
     }
-   }
+    
+   
   }
   
   

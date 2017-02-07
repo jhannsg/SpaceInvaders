@@ -21,7 +21,7 @@ class Bullet extends Sprite{
   void update()
   {
     y -= 1;
-    if (x < 5)
+    if (y < 5)
     {
       
     }

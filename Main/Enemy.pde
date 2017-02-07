@@ -1,7 +1,7 @@
 class Enemy extends Sprite {
   float x;
   float y;
-  int noRows = 4;
+  int noRows = 3;
   int noCols = 10;
   float enemySpeed; 
   
@@ -23,7 +23,7 @@ class Enemy extends Sprite {
     {
       if(noRows > 1) 
       {
-        x = x - noCols * 60; //reposition x
+        x = x - noCols * 60; //reposition x after first row drawn
       }
       for (int j = 1; j <= noCols; j++) 
       {
@@ -61,6 +61,21 @@ class Enemy extends Sprite {
   void update()
   {
     x += enemySpeed;
+    
+     for(int i = 0 ; i < sprites.size() ; i ++)
+    {
+      Sprite sp = sprites.get(i);
+      if (sp instanceof Bullet)
+      {
+        Bullet b = (Bullet) sp;
+        if (dist(sp.x, sp.y, this.x, this.y) < sizeX)
+        {
+          sprites.remove(b);
+          sprites.remove(this);
+        }
+      }
+    }
+    
   }
   
   void drop()
