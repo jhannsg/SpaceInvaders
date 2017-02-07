@@ -1,47 +1,48 @@
 class Enemy extends Sprite {
   float x;
   float y;
-  float sizeX = 60;
-  float sizeY = 30;
   int noRows = 4;
   int noCols = 10;
-  float enemySpeed = 1; 
-  boolean alive = true;
+  float enemySpeed; 
+  
   
   Enemy()
   {}
   
-  Enemy (float x, float y)
+  Enemy (float x, float y, float enemySpeed)
   {
      this.x = x;
      this.y = y;
+     this.enemySpeed = enemySpeed;
   }
   
   public void createEnemy()
-  {
-    float posY = 70;
+  { 
   
     for (int i = 1; i <= noRows; i++)
     {
-      float posX = 50;
+      if(noRows > 1) 
+      {
+        x = x - noCols * 60; //reposition x
+      }
       for (int j = 1; j <= noCols; j++) 
       {
-        enemies.add(new Enemy(posX , posY));
-        posX += 60;
+        sprites.add(new Enemy(x , y, enemySpeed));
+        x += 60;
       }
-      posY += 50;
+      y += 50;
       
     }
     println("create enemy works");
-    println("size of aarray enemy : " + enemies.size());
+    println("size of aarray enemy : " + sprites.size());
   }
   
-  void drawEnemy()
+  void render()
   {
     
       if (alive)
       {
-        if(frameCount%60 < 30){
+        if(frameCount%100 < 50){
           fill(white);
         }
         else {
@@ -54,7 +55,7 @@ class Enemy extends Sprite {
             
        } 
        
-   }//end drawEnemy()
+   }//end render()
  
  
   void update()
@@ -64,10 +65,10 @@ class Enemy extends Sprite {
   
   void drop()
   {
-    for(int i = 0; i < enemies.size(); i++)
+    for(int i =  sprites.size()-1 ; i >= 0 ; i--)
     {
-        enemies.get(i).enemySpeed = -enemies.get(i).enemySpeed;
-        enemies.get(i).y += 35;
+        sprites.get(i).speed = -sprites.get(i).speed;
+        sprites.get(i).y += 35;
       
     }
   }

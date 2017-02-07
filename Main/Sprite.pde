@@ -1,26 +1,28 @@
-class Sprite
+abstract class Sprite
 {
- float x;
- float y;
+  
+  float sizeX = 60;
+  float sizeY = 30;
+  float x;
+  float y;
 // PVector pos;
  //float speed = 100;
  color eColor; 
- 
+ boolean visible = true;
+ boolean alive = true;
+ float speed = 1;
  //Constructor
   Sprite()
  {
-   //pos = new PVector(x, y);
-  
-
  }
  
  
- void render()
+ abstract void render();
+ abstract void update();
+ 
+ void die()
  {
-   //updateSprite();
-   //drawSprite(x, y);
-   
+   visible = false;
  }
-
-
+ 
 }

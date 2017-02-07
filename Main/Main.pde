@@ -1,18 +1,26 @@
 Player player = new Player();
-ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-Enemy enemy = new Enemy();
+//ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
+float speed = 5;
+float startX = 100;
+float startY = 50;
+
+Enemy enemy = new Enemy(startX, startY, speed);
+
+ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 color white = color(255,255,255);
-color red = color(255,0,0);
+color red = color(100,255,122);
 void setup() 
 {
 
   size(1280, 700);
   enemy.createEnemy();
+  
+  
+  sprites.add(enemy);
+  sprites.add(player);
 }
-
-//Sprite s = new Sprite(200, 400, color(122,122,0)); 
-
 
 void draw()
 {
@@ -20,26 +28,18 @@ void draw()
   background(0);
   
   //draw & update enemies
-  for(int i = 0; i < enemies.size(); i++)
+  for(int i = sprites.size()-1; i >= 0 ; i--)
   {
-    Enemy e = enemies.get(i);
-    e.drawEnemy();
-    e.update();
-    if(e.alive && ((e.x == width - e.sizeX) || e.x < 1 ))
+    Sprite sp = sprites.get(i);
+    sp.render();
+    sp.update();
+    if(sp.alive && ((sp.x == width - sp.sizeX) || sp.x < 20 ))
       {
-          e.drop();
+          enemy.drop();
       }
   }
-  
-  player.draw();
-  player.update();
+ 
   fill(white);
-  strokeWeight(2);
-  line(0, height - 50, width, height - 50);
-  
- 
  
   
-  
-  
-}
+}//end draw()
