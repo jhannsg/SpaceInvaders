@@ -15,6 +15,7 @@ class Player extends Sprite {
   }
   
   void draw(){
+    fill(white);
     rect(playerX, playerY, sizeX, sizeY);
      
   }

@@ -3,7 +3,7 @@ ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 Enemy enemy = new Enemy();
 
 color white = color(255,255,255);
-
+color red = color(255,0,0);
 void setup() 
 {
 

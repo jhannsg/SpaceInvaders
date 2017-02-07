@@ -39,13 +39,23 @@ class Enemy extends Sprite {
   void drawEnemy()
   {
     
-         if (alive)
-          {
-            fill(255,255,255);
-            ellipse(x , y , sizeX, sizeY);
-            println("drawEnemy okay");
-          }  
+      if (alive)
+      {
+        if(frameCount%60 < 30){
+          fill(white);
+        }
+        else {
+        fill(red);
+              
+        }
+ 
+         ellipse(x , y , sizeX, sizeY);
+         println("drawEnemy okay");
+            
+       } 
+       
    }//end drawEnemy()
+ 
  
   void update()
   {
