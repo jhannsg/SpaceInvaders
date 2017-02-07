@@ -1,27 +1,35 @@
 Player player = new Player();
+ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+Enemy enemy = new Enemy();
 
+color white = color(255,255,255);
 
 void setup() 
 {
 
   size(1280, 700);
-  // playscreen();
-   s.render();
-  
-  
-  
+  enemy.createEnemy();
 }
 
-Sprite s = new Sprite(200, 400, color(122,122,0)); 
+//Sprite s = new Sprite(200, 400, color(122,122,0)); 
 
 
 void draw()
 {
   
   background(0);
+  
+  //draw & update enemies
+  for(int i = 0; i < enemies.size(); i++)
+  {
+    Enemy e = enemies.get(i);
+    e.drawEnemy();
+    e.update();
+  }
+  
   player.draw();
   player.update();
-  fill(244,164,96);
+  fill(white);
   strokeWeight(2);
   line(0, height - 50, width, height - 50);
   

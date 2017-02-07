@@ -1,10 +1,11 @@
 class Enemy extends Sprite {
   float x;
   float y;
-  float sizeX = 50;
+  float sizeX = 60;
   float sizeY = 30;
-  int noRows = 10;
-  int noCols = 4;
+  int noRows = 4;
+  int noCols = 10;
+  float enemySpeed = 1; 
   boolean alive = true;
   
   Enemy()
@@ -14,8 +15,6 @@ class Enemy extends Sprite {
   {
      this.x = x;
      this.y = y;
-   
-   
   }
   
   public void createEnemy()
@@ -27,7 +26,7 @@ class Enemy extends Sprite {
       float posX = 50;
       for (int j = 1; j <= noCols; j++) 
       {
-        enemies.add(new Enemy(i*posX , j*posY));
+        enemies.add(new Enemy(posX , posY));
         posX += 60;
       }
       posY += 50;
@@ -37,26 +36,19 @@ class Enemy extends Sprite {
     println("size of aarray enemy : " + enemies.size());
   }
   
-  void drawEnemy(float x, float y)
+  void drawEnemy()
   {
-    for(int i = 1; i <= noRows; i++)
-    {
-      for(int j = 1; j <= noCols; j++)
-      {
-        if (alive)
+    
+         if (alive)
           {
             fill(255,255,255);
-            ellipse(x*i/2 , y*j/2, sizeX, sizeY);
+            ellipse(x , y , sizeX, sizeY);
             println("drawEnemy okay");
-          }
-      }
-        
-    }
-      
-    }
-    
-  
-  
-  
-  
+          }  
+   }//end drawEnemy()
+ 
+  void update()
+  {
+    x += enemySpeed;
+  }
 }

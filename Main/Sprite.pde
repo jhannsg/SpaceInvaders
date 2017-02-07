@@ -7,12 +7,10 @@ class Sprite
  color eColor; 
  
  //Constructor
-  Sprite(float x, float y, color eColor)
+  Sprite()
  {
    //pos = new PVector(x, y);
-   this.x = x;
-   this.y = y;
-   this.eColor =  eColor;
+  
 
  }
  

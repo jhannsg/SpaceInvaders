@@ -7,7 +7,7 @@ class Player extends Sprite {
   
   Player ()
   {
-    super(0,0,0);
+    super();
     x = width/2;
     y = height - 55 ;
     
@@ -15,7 +15,6 @@ class Player extends Sprite {
   }
   
   void draw(){
-    stroke(1);
     rect(playerX, playerY, sizeX, sizeY);
      
   }
