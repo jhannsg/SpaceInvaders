@@ -1,5 +1,5 @@
 class Player extends Sprite {
-  float sizeX = 50;
+  float sizeX = 80;
   float sizeY = 30;
   float playerX = 600;
   float playerY = 600;
@@ -37,8 +37,5 @@ class Player extends Sprite {
     
    
   }
-  
-  void drop()
-  {}
   
 }//end Player class

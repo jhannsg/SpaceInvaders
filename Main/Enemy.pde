@@ -4,7 +4,7 @@ class Enemy extends Sprite {
   float sizeX = 60;
   float sizeY = 30;
   int noRows = 3;
-  int noCols = 6;
+  int noCols = 2;
   float enemySpeed; 
   
   
@@ -72,14 +72,17 @@ class Enemy extends Sprite {
       if (sp instanceof Bullet)
       {
         Bullet b = (Bullet) sp;
-        if ((b.x >= x && b.x <= x+ sizeX &&
+        if ((b.x >= x -25 && b.x <= x+ sizeX -25 &&
               b.y >= y && b.y <= y + sizeY) )
         {
           score +=1;
           sprites.remove(b);
           sprites.remove(this);
           println("killed");
-          
+          if(score == noRows * noCols)
+          {
+             gameOver = true; 
+          }
         }
       }
      

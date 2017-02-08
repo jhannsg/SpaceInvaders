@@ -32,11 +32,5 @@ class Bullet extends Sprite{
     
     
     
-  }
-  
-  void drop()
-  {
-  }
-  
-  
+  } 
 }
