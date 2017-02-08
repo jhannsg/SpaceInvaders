@@ -1,10 +1,8 @@
 abstract class Sprite
 {
-  
-  float sizeX = 60;
-  float sizeY = 30;
-  float x;
-  float y;
+float x;
+float y;
+
 // PVector pos;
  //float speed = 100;
  color eColor; 
@@ -19,7 +17,7 @@ abstract class Sprite
  
  abstract void render();
  abstract void update();
- abstract void drop();
+
  
  void die()
  {

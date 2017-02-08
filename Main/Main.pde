@@ -1,20 +1,24 @@
 
 color white = color(255,255,255);
 color red = color(100,255,122);
-float speed = 2;
+float speed = 3;
 float startX = 100;
 float startY = 50;
-
+int score = 0;
 Player player = new Player();
 Enemy enemy = new Enemy(startX, startY, speed);
 
 ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
-
+PFont font1;
+PFont font2;
 
 void setup() 
 {
   size(1280, 700);
+  //font1 = loadFont("MagmawaveCaps.vlw");
+  //font2 = loadFont("PingFang.vlw");
+  
   
   enemy.createEnemy();
   sprites.add(player);
@@ -32,9 +36,9 @@ void draw()
     Sprite sp = sprites.get(i);
     sp.render();
     sp.update();
-    sp.drop();
   }
-  //fill(white);
+   textSize(36);
+   text("Score : " + score, 50, 670 );
  
   
 }//end draw()

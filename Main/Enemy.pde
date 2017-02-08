@@ -1,11 +1,12 @@
 class Enemy extends Sprite {
   float x;
   float y;
-  float sizx = 60;
-  float sizy = 30;
+  float sizeX = 60;
+  float sizeY = 30;
   int noRows = 3;
-  int noCols = 10;
+  int noCols = 6;
   float enemySpeed; 
+  
   
   
   Enemy()
@@ -25,15 +26,15 @@ class Enemy extends Sprite {
     {
       if(i > 0) 
       {
-        x = x - (noCols  * 60); //reposition x after first row drawn
+        x = x - (noCols  * 70); //reposition x after first row drawn
       }
       for (int j = 0; j < noCols; j++) 
       {
         sprites.add(new Enemy(x , y, enemySpeed));
-        x += 60;
+        x += 70;
         if(x > 1200)
         {
-          x = x - (noCols * 60);
+          x = x - (noCols * 70);
         }
       }
       y += 50;
@@ -55,7 +56,7 @@ class Enemy extends Sprite {
         fill(red);
               
         }
-          ellipse(x , y , sizx, sizy);
+          ellipse(x , y , sizeX, sizeY);
         
       }
        
@@ -65,23 +66,23 @@ class Enemy extends Sprite {
  
   void update()
   {
-  
-    //if(x > 1200 || x < 50) enemySpeed *= -1;
-    
      for(int i = 0 ; i < sprites.size() ; i ++)
     {
       Sprite sp = sprites.get(i);
       if (sp instanceof Bullet)
       {
         Bullet b = (Bullet) sp;
-        if ((b.x >= x && b.x <= x+ sizx &&
-              b.y >= y && b.y <= y + sizy) )
+        if ((b.x >= x && b.x <= x+ sizeX &&
+              b.y >= y && b.y <= y + sizeY) )
         {
+          score +=1;
           sprites.remove(b);
           sprites.remove(this);
+          println("killed");
+          
         }
       }
-      
+     
       if(sp instanceof Enemy )
       {
        Enemy e = (Enemy) sp;
@@ -97,6 +98,7 @@ class Enemy extends Sprite {
       
     }
     x += enemySpeed; 
+   
   }
     
 }
