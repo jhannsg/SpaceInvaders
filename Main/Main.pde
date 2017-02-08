@@ -9,7 +9,7 @@ float startX = 100;
 float startY = 50;
 int score = 0;
 int level = 1;
-int lives = 3;
+int lives = 5;
 
 Player player = new Player();
 Enemy enemy = new Enemy(startX, startY, speed);
@@ -22,6 +22,8 @@ ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 PFont font1;
 PFont font2;
 
+Table table;
+
 void setup() 
 {
   size(1280, 700);
@@ -30,7 +32,20 @@ void setup()
   enemy.createEnemy();
   sprites.add(player);
   
+
+  table = loadTable("new.csv");
 } 
+
+void saveData()
+{
+  for (TableRow row : table.rows()) {
+  int id = row.getInt("id");
+  TableRow newRow = table.addRow();
+  newRow.setInt("score", score);
+  saveTable(table, "new.csv");
+}
+
+}
 
 
 void draw()
@@ -75,6 +90,10 @@ void draw()
   {
     background(0);
     gameStart();
+  }
+  if (score > 0)
+  {
+   // saveData();
   }
     
 }//end draw()
