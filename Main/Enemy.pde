@@ -1,6 +1,8 @@
 class Enemy extends Sprite {
-  float x;
-  float y;
+  float Ex;
+  float Ey;
+  float sizeX = 60;
+  float sizeY = 30;
   int noRows = 3;
   int noCols = 10;
   float enemySpeed; 
@@ -9,10 +11,10 @@ class Enemy extends Sprite {
   Enemy()
   {}
   
-  Enemy (float x, float y, float enemySpeed)
+  Enemy (float Ex, float Ey, float enemySpeed)
   {
-     this.x = x;
-     this.y = y;
+     this.Ex = Ex;
+     this.Ey = Ey;
      this.enemySpeed = enemySpeed;
   }
   
@@ -23,18 +25,18 @@ class Enemy extends Sprite {
     {
       if(i > 0) 
       {
-        x = x - (noCols  * 60); //reposition x after first row drawn
+        Ex = Ex - (noCols  * 60); //reposition x after first row drawn
       }
       for (int j = 0; j < noCols; j++) 
       {
-        sprites.add(new Enemy(x , y, enemySpeed));
-        x += 60;
-        if(x == 1200)
+        sprites.add(new Enemy(Ex , Ey, enemySpeed));
+        Ex += 60;
+        if(Ex == 1200)
         {
-          x = x - (noCols  * 60);
+          Ex = Ex - (noCols * 60);
         }
       }
-      y += 50;
+      Ey += 50;
       
     }
     println("create enemy works");
@@ -53,22 +55,18 @@ class Enemy extends Sprite {
         fill(red);
               
         }
-      
-          ellipse(x , y , sizeX, sizeY);
-           println("drawEnemy okay");
-        }
+          ellipse(Ex , Ey , sizeX, sizeY);
         
-        //ellipse(x , y , sizeX, sizeY);
-        //rect (x,y, sizeX, sizeY);
-         println("drawEnemy okay"); 
+      }
+       
        
    }//end render()
  
  
   void update()
   {
-    x += enemySpeed;
-    if(x > 1200 || x < 50) enemySpeed *= -1;
+    Ex += enemySpeed;
+    //if(x > 1200 || x < 50) enemySpeed *= -1;
     
      for(int i = 0 ; i < sprites.size() ; i ++)
     {
@@ -76,8 +74,8 @@ class Enemy extends Sprite {
       if (sp instanceof Bullet)
       {
         Bullet b = (Bullet) sp;
-        if ((b.x >= x && b.x <= x+ sizeX &&
-              b.y >= y && b.y <= y + sizeY) )
+        if ((b.x >= x && b.x <= Ex+ sizeX &&
+              b.y >= y && b.y <= Ey + sizeY) )
         {
           sprites.remove(b);
           sprites.remove(this);
@@ -96,10 +94,10 @@ class Enemy extends Sprite {
       if(sp instanceof Enemy )
       {
        Enemy e = (Enemy) sp;
-       if( ((e.x == width - sp.sizeX) || e.x < 20 ))
+       if( ((e.Ex == 1200) || e.Ex == 50 ))
        { 
-         sp.speed = -sp.speed;
-         e.y += 35;
+         enemySpeed *= (-1);
+        // Ey += 35;
        }
       }
     }

@@ -17,7 +17,6 @@ void setup()
   size(1280, 700);
   
   enemy.createEnemy();
-  sprites.add(enemy);
   sprites.add(player);
 }
 
@@ -34,11 +33,8 @@ void draw()
     sp.render();
     sp.update();
     sp.drop();
-    
-  
   }
- 
-  fill(white);
+  //fill(white);
  
   
 }//end draw()
