@@ -1,6 +1,6 @@
 /*Space Invaders game 
- 
- 
+ Written by Paul Petrisor
+ DT228/2 - C15735611
  */
 color white = color(255, 255, 255);
 color red = color(100, 255, 122);
@@ -10,10 +10,12 @@ float startY = 50;
 int score = 0;
 int level = 1;
 int lives = 3;
+
 Player player = new Player();
 Enemy enemy = new Enemy(startX, startY, speed);
 Bomb bomb = new Bomb(random(200, 600), random(60, 200));
 boolean gameOver = false;
+boolean startGame = false;
 
 ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
@@ -24,7 +26,7 @@ void setup()
 {
   size(1280, 700);
   
-  bomb.createBomb();
+  //bomb.createBomb();
   enemy.createEnemy();
   sprites.add(player);
   
@@ -35,15 +37,19 @@ void draw()
 {
   if (gameOver == false)
   {
+    textAlign(LEFT);
     background(0);
-
-    //draw & update enemies
-    //for(int i = sprites.size()-1; i >= 0 ; i--)
+    noStroke();
     for (int i = 0; i < sprites.size(); i++)
     {
       Sprite sp = sprites.get(i);
       sp.render();
       sp.update();
+    }
+    
+     if(frameCount%300 == 0)
+    {
+      sprites.add(new Bomb(random(300, 700), random(100, 300)));
     }
 
     textSize(36);
@@ -53,41 +59,75 @@ void draw()
     text("LIVES : " + lives, 500, 670);
   }
 
-  if (gameOver)
+  if (gameOver || lives == 0)
   {
+    noStroke();
     background(0);
     textSize(48);
     textAlign(CENTER);
     text("GAME OVER", width/2, height/2-100);
     text("SCORE : " + score, width/2, height/2 + 100);
-   
-
+  
     sprites.clear();
-
-    textSize(36);
-
-    float x = width / 2 + 200;
-    float y = height / 2 + 200 ;
-    float size = width / 6; 
-    color c = color(0, 200, 0);
-    text("DO YOU WANT TO CONTINUE ?", 380, 150);
-    strokeWeight(4);
-    stroke(c);
-    noFill();
-
-    if ( (dist(mouseX, mouseY, x-size, y)) < size * 0.5) //if mouse over circle1
-    { 
-      fill(67); 
-      if (mousePressed)
-      {
-        gameOver = false;
-      }
-    } else
-    {
-      noFill();
-    }
-    ellipse(x - size, y, size, size);
-    line(x - size - 60, y - 40, x - size - 15, y + 60);
-    line(x - size - 15, y + 60, x - size + 50, y - 60);
   }
+  
+  if(!startGame)
+  {
+    background(0);
+    gameStart();
+  }
+    
 }//end draw()
+
+
+
+void gameStart()
+{
+  float xs = width / 2;
+  float ys = height / 2;
+   float size = width / 6; 
+   textSize(48);
+   textAlign(CENTER);
+  text("SPACE INVADERS ", 640, 150);
+  text("CONTINUE ?  ", 640, 500);
+    stroke(0,255,0);
+    fill(23,0,100);
+    
+      if ( (dist(mouseX, mouseY, xs-size, ys)) < size * 0.5) //if mouse over circle1
+      { 
+        fill(white); 
+        if(mousePressed)
+        {
+          startGame = true;
+        }
+      }
+     
+       else
+       {
+         noFill();  
+       }
+       ellipse(xs - size, ys , size, size);
+       line(xs - size - 60, ys - 40 ,  xs - size - 15 , ys + 60);
+       line(xs - size - 15, ys + 60 , xs - size + 50, ys - 60);
+    
+     
+      if  ((dist(mouseX, mouseY, xs+size, ys)) < size * 0.5) //if mouse over circle2
+      {
+        fill(67);
+        if(mousePressed)
+        {
+          startGame = false;
+          exit();
+        }
+      }
+      else
+      {
+        noFill(); 
+      }
+        ellipse(xs + size, ys, size, size); 
+        stroke(255,0,0);
+        line(xs + size - 50, ys - 50,  xs + size + 50, ys + 50);
+        line(xs + size + 50, ys - 50, xs + size - 50, ys + 50);
+   
+       
+}

@@ -35,5 +35,25 @@ class Player extends Sprite {
     if (timer >= 20) {
       okToBullet = true;
     }
+    
+    
+    
+    for (int i = 0; i < sprites.size(); i ++)
+    {
+      Sprite sp = sprites.get(i);
+      if (sp instanceof Bomb)
+      {
+        Bomb b = (Bomb) sp;
+        
+        if ((b.x >= playerX -25 && b.x <= playerX+ sizeX -25 &&
+          b.y >= playerY && b.y <= playerY + sizeY) )
+        {
+          sprites.remove(b );
+          sprites.remove(this);
+          lives = 0; 
+          println("removed");
+        }
+      }
+    }
   }
 }//end Player class

@@ -9,7 +9,6 @@ abstract class Sprite
   //Constructor
   Sprite()
   {
-    
   }
   
   abstract void render();

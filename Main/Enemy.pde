@@ -75,12 +75,12 @@ class Enemy extends Sprite {
           score +=1;
           sprites.remove(b );
           sprites.remove(this);
-          println("killed");
-          if (score == noRows * noCols)
+          
+          if (score == noRows * noCols || lives == 0)
           {
             nextLevel();
             sprites.clear();
-            //gameOver = true;
+            gameOver = true;
           }
         }
       }
@@ -96,7 +96,9 @@ class Enemy extends Sprite {
       }
     }
     x += enemySpeed;
-  }
+    
+    
+  }//end update()
 
   void nextLevel()
   {

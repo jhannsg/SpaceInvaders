@@ -21,19 +21,22 @@ class Bomb extends Sprite {
 
 
   void render()
-  {
+  {   
     fill(255, 0, 0);
     pushMatrix();
     rotate(theta);
     rect(x, y, 30, 30);    
     popMatrix();
- 
-
   }
 
 
   void update()
   {
     y++;
+    if(y > 670)
+    {
+      lives--;
+      sprites.remove(this);
+    }
   }
 }//end Bomb class
