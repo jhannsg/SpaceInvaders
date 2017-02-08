@@ -5,9 +5,7 @@ class Enemy extends Sprite {
   float sizeY = 30;
   int noRows = 3;
   int noCols = 2;
-  float enemySpeed; 
-  
-  
+  float enemySpeed;  
   
   Enemy()
   {}
@@ -76,12 +74,14 @@ class Enemy extends Sprite {
               b.y >= y && b.y <= y + sizeY) )
         {
           score +=1;
-          sprites.remove(b);
+          sprites.remove(b );
           sprites.remove(this);
           println("killed");
           if(score == noRows * noCols)
           {
-             gameOver = true; 
+             nextLevel();
+             sprites.clear();
+             //gameOver = true; 
           }
         }
       }
@@ -103,6 +103,21 @@ class Enemy extends Sprite {
     x += enemySpeed; 
    
   }
+  
+  void nextLevel()
+  {
+    
+    noCols++;
+    if(noCols%2 == 0)
+    {
+      noRows++;
+    }
+    
+    enemySpeed ++;
+    reset();
+  }
+  
+  
     
 }
 

@@ -1,5 +1,5 @@
 class Player extends Sprite {
-  float sizeX = 80;
+  float sizeX = 100;
   float sizeY = 30;
   float playerX = 600;
   float playerY = 600;
@@ -14,7 +14,10 @@ class Player extends Sprite {
   void render(){
     fill(white);
     rect(playerX, playerY, sizeX, sizeY);
-    //rect(0, playerY+20, width, playerY+25);
+    rect(playerX+20, playerY + 1, sizeX-40, -20);
+    rect(playerX+47, playerY - 15, sizeX-90, -30);
+    noFill();
+    rect(0, playerY+35, width, playerY+40);
      
   }
   
@@ -24,7 +27,7 @@ class Player extends Sprite {
     
     if (keyPressed && keyCode == UP && okToBullet )
     {
-      Bullet b = new Bullet(playerX+sizeX/2, playerY, speed);
+      Bullet b = new Bullet(playerX+sizeX/2, playerY -50 , speed);
       sprites.add(b);
       timer = 0;
       okToBullet = false;
@@ -34,8 +37,6 @@ class Player extends Sprite {
             okToBullet = true;
         }
     
-    
-   
   }
   
 }//end Player class

@@ -1,14 +1,13 @@
 class Bomb extends Sprite{
   float theta;
-  PVector direction, pos;
-  int numBombs = 20;
+  int numBombs = 10;
   Bomb(float x, float y)
   { 
     this.x = x;
     this.y = y; 
     theta = 0;
-    direction = new PVector(random(-1,1), random(-1,1));
-    pos = new PVector(x, y);
+    
+    pos = new PVector(0, 1);
   }
   
   void createBomb()
@@ -25,31 +24,14 @@ class Bomb extends Sprite{
   
   void render()
   {
-    pushMatrix();
-    translate(pos.x, pos.y);
-    fill(255, 0, 0);
-    rotate(theta);
-  
-    for(int i = 0 ; i < sprites.size() ; i ++)
-     {
-      Sprite sp = sprites.get(i);
-        if(sp instanceof Bomb)
-        {
-          if(frameCount% 500 < 499)
-          {
-            rect(x, y, 30, 30);
-          }
-        }
-     }
-    popMatrix();
+    fill(255,0,0);
+    rect(x, y, 30, 30);
   }
   
   
   void update()
   {
-     theta+= random(0.001f, 0.0001f);
-     pos.add(direction);
-     
+    y++;
   }
   
 }//end Bomb class
