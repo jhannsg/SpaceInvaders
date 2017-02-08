@@ -1,17 +1,18 @@
 /*Space Invaders game 
-
-
-*/
-color white = color(255,255,255);
-color red = color(100,255,122);
+ 
+ 
+ */
+color white = color(255, 255, 255);
+color red = color(100, 255, 122);
 float speed = 2;
 float startX = 100;
 float startY = 50;
-int score ;
-int level ;
+int score = 0;
+int level = 1;
+int lives = 3;
 Player player = new Player();
 Enemy enemy = new Enemy(startX, startY, speed);
-Bomb bomb = new Bomb(random(200, 900), random(60, 200));
+Bomb bomb = new Bomb(random(200, 600), random(60, 200));
 boolean gameOver = false;
 
 ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -22,56 +23,49 @@ PFont font2;
 void setup() 
 {
   size(1280, 700);
-  reset();
-}  
-  void reset()
-  {
-    speed = 2;
-    startX = 100;
-    startY = 50;
-    score = 0;
-    level = 1;
-    
-    
-    enemy.createEnemy();
-    sprites.add(player);
-    //sprites.add(bomb);
-    bomb.createBomb();
-  }//end reset()
+  
+  bomb.createBomb();
+  enemy.createEnemy();
+  sprites.add(player);
+  
+} 
 
 
 void draw()
 {
-  if(gameOver == false)
+  if (gameOver == false)
   {
     background(0);
-    
+
     //draw & update enemies
     //for(int i = sprites.size()-1; i >= 0 ; i--)
-    for(int i = 0; i < sprites.size(); i++)
+    for (int i = 0; i < sprites.size(); i++)
     {
       Sprite sp = sprites.get(i);
       sp.render();
       sp.update();
     }
-     
-     textSize(36);
-     fill(red);
-     text("Score : " + score, 50, 670 );
+
+    textSize(36);
+    fill(red);
+    text("Score : " + score, 50, 670 );
+    text("LEVEL : " + level, 1000, 670);
+    text("LIVES : " + lives, 500, 670);
   }
-  
-   if (gameOver)
-   {
-      background(0);
-      textSize(48);
-      textAlign(CENTER);
-      text("GAME OVER" , width/2, height/2-100);
-      text("SCORE : " + score, width/2, height/2 + 100);
-      
-      sprites.clear();
-      
-      textSize(36);
-      
+
+  if (gameOver)
+  {
+    background(0);
+    textSize(48);
+    textAlign(CENTER);
+    text("GAME OVER", width/2, height/2-100);
+    text("SCORE : " + score, width/2, height/2 + 100);
+   
+
+    sprites.clear();
+
+    textSize(36);
+
     float x = width / 2 + 200;
     float y = height / 2 + 200 ;
     float size = width / 6; 
@@ -80,23 +74,20 @@ void draw()
     strokeWeight(4);
     stroke(c);
     noFill();
-    
-      if ( (dist(mouseX, mouseY, x-size, y)) < size * 0.5) //if mouse over circle1
-      { 
-        fill(67); 
-        if(mousePressed)
-        {
-          gameOver = false;
-        }
+
+    if ( (dist(mouseX, mouseY, x-size, y)) < size * 0.5) //if mouse over circle1
+    { 
+      fill(67); 
+      if (mousePressed)
+      {
+        gameOver = false;
       }
-     
-       else
-       {
-         noFill();  
-       }
-       ellipse(x - size, y , size, size);
-       line(x - size - 60, y - 40 ,  x - size - 15 , y + 60);
-       line(x - size - 15, y + 60 , x - size + 50, y - 60);
-   }
-  
+    } else
+    {
+      noFill();
+    }
+    ellipse(x - size, y, size, size);
+    line(x - size - 60, y - 40, x - size - 15, y + 60);
+    line(x - size - 15, y + 60, x - size + 50, y - 60);
+  }
 }//end draw()
