@@ -1,8 +1,8 @@
 class Enemy extends Sprite {
-  float Ex;
-  float Ey;
-  float sizeX = 60;
-  float sizeY = 30;
+  float x;
+  float y;
+  float sizx = 60;
+  float sizy = 30;
   int noRows = 3;
   int noCols = 10;
   float enemySpeed; 
@@ -11,10 +11,10 @@ class Enemy extends Sprite {
   Enemy()
   {}
   
-  Enemy (float Ex, float Ey, float enemySpeed)
+  Enemy (float x, float y, float enemySpeed)
   {
-     this.Ex = Ex;
-     this.Ey = Ey;
+     this.x = x;
+     this.y = y;
      this.enemySpeed = enemySpeed;
   }
   
@@ -25,18 +25,18 @@ class Enemy extends Sprite {
     {
       if(i > 0) 
       {
-        Ex = Ex - (noCols  * 60); //reposition x after first row drawn
+        x = x - (noCols  * 60); //reposition x after first row drawn
       }
       for (int j = 0; j < noCols; j++) 
       {
-        sprites.add(new Enemy(Ex , Ey, enemySpeed));
-        Ex += 60;
-        if(Ex == 1200)
+        sprites.add(new Enemy(x , y, enemySpeed));
+        x += 60;
+        if(x > 1200)
         {
-          Ex = Ex - (noCols * 60);
+          x = x - (noCols * 60);
         }
       }
-      Ey += 50;
+      y += 50;
       
     }
     println("create enemy works");
@@ -55,7 +55,7 @@ class Enemy extends Sprite {
         fill(red);
               
         }
-          ellipse(Ex , Ey , sizeX, sizeY);
+          ellipse(x , y , sizx, sizy);
         
       }
        
@@ -65,7 +65,7 @@ class Enemy extends Sprite {
  
   void update()
   {
-    Ex += enemySpeed;
+  
     //if(x > 1200 || x < 50) enemySpeed *= -1;
     
      for(int i = 0 ; i < sprites.size() ; i ++)
@@ -74,34 +74,30 @@ class Enemy extends Sprite {
       if (sp instanceof Bullet)
       {
         Bullet b = (Bullet) sp;
-        if ((b.x >= x && b.x <= Ex+ sizeX &&
-              b.y >= y && b.y <= Ey + sizeY) )
+        if ((b.x >= x && b.x <= x+ sizx &&
+              b.y >= y && b.y <= y + sizy) )
         {
           sprites.remove(b);
           sprites.remove(this);
         }
       }
-    }
-    
-  }
- 
- void drop()
-   {
-     for(int i = 0 ; i < sprites.size() ; i ++)
-    {
-      Sprite sp = sprites.get(i);
-       
+      
       if(sp instanceof Enemy )
       {
        Enemy e = (Enemy) sp;
-       if( ((e.Ex == 1200) || e.Ex == 50 ))
+       if( ((e.x >= 1200) || e.x <= 50 ))
        { 
-         enemySpeed *= (-1);
-        // Ey += 35;
+         enemySpeed = -enemySpeed;
+         y += 35;
+         
        }
+      
       }
+       
+      
     }
-   }  
+    x += enemySpeed; 
+  }
     
 }
 
